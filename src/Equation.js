@@ -9,8 +9,7 @@ class Equation extends Component {
 	}
 
 	check(playerAnswer) {
-		const numbers = this.props.numbers;
-		const correctAnswer = numbers[0] + numbers[1] + numbers[2];
+		const correctAnswer = this.props.numbers.reduce((sum, num) => sum + num);
 		const isCorrect = correctAnswer === this.state.proposedAnswer;
 		let score = 0;
 		if (isCorrect === playerAnswer) {

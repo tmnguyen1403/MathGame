@@ -5,12 +5,16 @@ import Equation from './Equation';
 
 
 class App extends Component {
-	state = {
-		value1: Math.floor(Math.random() * 100),
-		value2: Math.floor(Math.random() * 100),
-		value3: Math.floor(Math.random() * 100),
-		numCorrect: 0,
-		numQuestions: 1
+	constructor(props) {
+		super(props);
+		const {value1, value2, value3} = this.numberGenerator();
+		this.state = {
+			value1: value1,
+			value2: value2,
+			value3: value3,
+			numCorrect: 0,
+			answeredQuestions: 0
+		}
 	}
 
 	numberGenerator() {
@@ -18,7 +22,6 @@ class App extends Component {
 			value1: Math.floor(Math.random() * 100),
 			value2: Math.floor(Math.random() * 100),
 			value3: Math.floor(Math.random() * 100),
-			numQuestions: this.state.numQuestions + 1
 		}
 	}
 
@@ -27,11 +30,13 @@ class App extends Component {
 	}
 
 	newEquation() {
+
 		this.setState(this.numberGenerator());
+		this.setState({answeredQuestions: this.state.answeredQuestions + 1});
 	}
 
   render() {
-		const numbers = [this.state.value1, this.state.value2, this.state.value3];
+		const {value1, value2, value3} = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -41,12 +46,12 @@ class App extends Component {
         <div className="game">
           <h2>Mental Math</h2>
           <Equation
-						numbers={numbers}
+						numbers={[value1, value2, value3]}
 						updateScore= {(score) => this.updateScore(score)}
 						newEquation= {() => this.newEquation()}
 					/>
           <p className="text">
-            Your Score: {this.state.numCorrect}/{this.state.numQuestions}
+            Your Score: {this.state.numCorrect}/{this.state.answeredQuestions}
           </p>
         </div>
       </div>
