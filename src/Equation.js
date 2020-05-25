@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 class Equation extends Component {
 	state = {
 		proposedAnswer: Math.floor(Math.random() * 3) +
-			this.props.numbers[0] +
-			this.props.numbers[1] +
-			this.props.numbers[2]
+			this.props.numbers.reduce((sum, num) => sum + num)
 	}
 
 	check(playerAnswer) {
