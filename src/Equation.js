@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Equation extends Component {
 	state = {
@@ -44,5 +45,11 @@ class Equation extends Component {
 		)
 	}
 }
+
+Equation.propTypes = {
+	numbers: PropTypes.array.isRequired,
+	updateScore: PropTypes.func.isRequired,
+	newEquation: PropTypes.func.isRequired
+};
 
 export default Equation;
